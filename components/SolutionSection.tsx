@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TShirtIcon, CopyIcon, CheckCircleIcon } from './Icons';
+import { TShirtIcon, CopyIcon, CheckCircleIcon, UserCircleIcon, LinkIcon } from './Icons';
 
 const SolutionSection: React.FC = () => {
     const [step, setStep] = useState(0);
@@ -10,9 +10,10 @@ const SolutionSection: React.FC = () => {
         const sequence = [
             () => setStep(1), // Show Admin Panel
             () => setStep(2), // Show Link Generated
-            () => setStep(3), // Show Customer View
-            () => { setStep(4); setInventory(29); }, // Show Purchase and inventory drop
-            () => setStep(5), // Show final text
+            () => setStep(3), // Show Instagram Post
+            () => setStep(4), // Show Customer View
+            () => { setStep(5); setInventory(29); }, // Show Purchase and inventory drop
+            () => setStep(6), // Show final text
         ];
         let i = 0;
         const interval = setInterval(() => {
@@ -22,15 +23,16 @@ const SolutionSection: React.FC = () => {
             } else {
                 clearInterval(interval);
             }
-        }, 1500);
+        }, 1800);
         return () => clearInterval(interval);
     }, []);
 
     const showAdmin = step >= 1;
     const showLink = step >= 2;
-    const showCustomer = step >= 3;
-    const showPurchase = step >= 4;
-    const showFinalText = step >= 5;
+    const showInstaPost = step >= 3;
+    const showCustomer = step >= 4;
+    const showPurchase = step >= 5;
+    const showFinalText = step >= 6;
 
     return (
         <section className="py-20 md:py-32 bg-brand-light">
@@ -46,7 +48,7 @@ const SolutionSection: React.FC = () => {
                     </h2>
                 </motion.div>
 
-                <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                     {/* Admin Panel */}
                     <div className="bg-white rounded-2xl shadow-xl p-6 min-h-[400px]">
                         <h3 className="font-bold text-xl mb-4 text-center">1. Set your inventory.</h3>
@@ -74,9 +76,50 @@ const SolutionSection: React.FC = () => {
                         </AnimatePresence>
                     </div>
 
+                    {/* Share on Socials */}
+                    <div className="bg-white rounded-2xl shadow-xl p-6 min-h-[400px]">
+                        <h3 className="font-bold text-xl mb-4 text-center">2. Share your link.</h3>
+                        <AnimatePresence>
+                            {showInstaPost && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="w-full max-w-xs mx-auto mt-4"
+                                >
+                                    <div className="bg-white border-2 border-gray-100 rounded-2xl overflow-hidden shadow-inner">
+                                        {/* Header */}
+                                        <div className="p-3 flex items-center space-x-3 border-b border-gray-100">
+                                            <UserCircleIcon className="w-8 h-8 text-gray-500" />
+                                            <span className="font-bold text-sm">yourbrand</span>
+                                        </div>
+                                        {/* Image */}
+                                        <div className="bg-gray-50 aspect-square flex items-center justify-center">
+                                            <TShirtIcon className="w-32 h-32 text-gray-400" />
+                                        </div>
+                                        {/* Caption */}
+                                        <div className="p-4 text-sm space-y-3">
+                                            <p><span className="font-bold">yourbrand</span> Vintage Eagle Tee drop is LIVE! 🦅</p>
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ delay: 0.5, type: 'spring' }}
+                                                className="inline-block"
+                                            >
+                                                <span className="flex items-center gap-2 bg-gray-200 rounded-full px-3 py-1.5 text-xs text-brand-dark font-semibold">
+                                                    <LinkIcon className="w-4 h-4" />
+                                                    hypechart.co/drop/xyz
+                                                </span>
+                                            </motion.div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
                     {/* Customer Experience */}
                     <div className="bg-gray-800 rounded-2xl shadow-xl p-6 min-h-[400px]">
-                        <h3 className="font-bold text-xl mb-4 text-center text-white">2. Customers buy instantly.</h3>
+                        <h3 className="font-bold text-xl mb-4 text-center text-white">3. Customers buy instantly.</h3>
                         <AnimatePresence mode="wait">
                             {showCustomer && !showPurchase && (
                                 <motion.div
