@@ -2,6 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = href.replace(/.*#/, "");
+    const elem = document.getElementById(targetId);
+    elem?.scrollIntoView({
+        behavior: "smooth",
+    });
+  };
+
   return (
     <motion.header 
       className="fixed top-0 left-0 right-0 z-50"
@@ -14,7 +24,7 @@ const Header: React.FC = () => {
           <div className="flex-shrink-0">
             <h1 className="text-xl md:text-2xl font-extrabold text-brand-dark">HypeChart</h1>
           </div>
-          <a href="#waitlist" className="hidden sm:inline-block px-6 py-2 text-sm font-bold text-white bg-brand-dark rounded-full hover:bg-gray-800 transition-colors duration-300">
+          <a href="#waitlist" onClick={handleScroll} className="hidden sm:inline-block px-6 py-2 text-sm font-bold text-white bg-brand-dark rounded-full hover:bg-gray-800 transition-colors duration-300">
             Get Early Access
           </a>
         </div>

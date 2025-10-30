@@ -1,20 +1,49 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# HypeChart.co Landing Page
 
-# Run and deploy your AI Studio app
+This repository contains the source code for the HypeChart.co landing page, the back-office solution for Instagram brands.
 
-This contains everything you need to run your app locally.
+## 🚀 Getting Started
 
-View your app in AI Studio: https://ai.studio/apps/drive/16glekm88E0SA-23N6vPNSGz86TgFcf7P
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-## Run Locally
+### Prerequisites
 
-**Prerequisites:**  Node.js
+Before you begin, ensure you have the following installed:
+*   [Node.js](https://nodejs.org/en/) (v18.x or later is recommended)
+*   [Git](https://git-scm.com/)
 
+### Installation & Setup
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1.  **Clone the repository**
+    
+    Open your terminal or command prompt and run the following command.
+    ```sh
+    git clone <repository-url>
+    cd <project-directory>
+    ```
+    *Replace `<repository-url>` with the actual URL to the repository and `<project-directory>` with the name of the folder created.*
+
+2.  **Install dependencies**
+    
+    Navigate into your new project directory and install the required npm packages.
+    ```sh
+    npm install
+    ```
+
+3.  **Set up Environment Variables**
+    
+    This project is set up for future integration with the Google Gemini API. Create a file named `.env.local` in the root of your project and add your API key.
+    
+    ```env
+    GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+    ```
+    *Note: The API key is not used by the current landing page but is required for upcoming features.*
+
+4.  **Run the application**
+    
+    Start the local development server.
+    ```sh
+    npm run dev
+    ```
+
+Once the command is successful, open your web browser and go to `http://localhost:3000` (or the URL provided in your terminal) to view the application.

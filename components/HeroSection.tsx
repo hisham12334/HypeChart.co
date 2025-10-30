@@ -39,6 +39,16 @@ const ChaoticBackground = () => {
 const HeroSection: React.FC = () => {
     const { displayText, isFinished } = useTypingEffect("Sell out. Don't burn out.", 2000, true);
 
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      e.preventDefault();
+      const href = e.currentTarget.href;
+      const targetId = href.replace(/.*#/, "");
+      const elem = document.getElementById(targetId);
+      elem?.scrollIntoView({
+          behavior: "smooth",
+      });
+    };
+
     return (
         <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-20">
             <ChaoticBackground />
@@ -58,6 +68,7 @@ const HeroSection: React.FC = () => {
                         </p>
                         <a
                             href="#waitlist"
+                            onClick={handleScroll}
                             className="mt-8 inline-block px-10 py-4 text-lg font-bold text-white bg-brand-dark rounded-full hover:bg-gray-800 transition-colors duration-300 transform hover:scale-105"
                         >
                             Get Early Access

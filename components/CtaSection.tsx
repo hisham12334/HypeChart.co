@@ -6,6 +6,7 @@ const CtaSection: React.FC = () => {
     const [whatsapp, setWhatsapp] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,14 +30,20 @@ const CtaSection: React.FC = () => {
             return;
         }
 
+        setLoading(true);
+
+        // --- Backend Integration Simulation ---
         // In a real application, this data would be sent to a backend API.
-        // For this frontend simulation, we'll log it to the console.
         console.log('Submitting to waitlist database:', { 
             email: trimmedEmail || null, 
             whatsapp: trimmedWhatsapp || null 
         });
-
-        setSubmitted(true);
+        
+        // Simulate a network request
+        setTimeout(() => {
+            setLoading(false);
+            setSubmitted(true);
+        }, 1500);
     };
 
     return (
@@ -75,6 +82,7 @@ const CtaSection: React.FC = () => {
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:ring-2 focus:ring-brand-accent focus:outline-none"
                                         aria-label="Email Address"
+                                        disabled={loading}
                                     />
                                 </div>
                                 <div className="relative flex items-center">
@@ -90,11 +98,12 @@ const CtaSection: React.FC = () => {
                                         onChange={(e) => setWhatsapp(e.target.value)}
                                         className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:ring-2 focus:ring-brand-accent focus:outline-none"
                                         aria-label="WhatsApp Number"
+                                        disabled={loading}
                                     />
                                 </div>
                                  {error && <p className="text-red-500 text-sm text-left -mt-2">{error}</p>}
-                                <button type="submit" className="w-full px-8 py-3 bg-brand-dark text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
-                                    Join The Waitlist
+                                <button type="submit" className="w-full px-8 py-3 bg-brand-dark text-white font-bold rounded-lg hover:bg-gray-800 transition-colors disabled:bg-gray-400" disabled={loading}>
+                                    {loading ? 'Submitting...' : 'Join The Waitlist'}
                                 </button>
                             </form>
                              <p className="mt-4 text-xs text-gray-500">No spam. Just an invite when we're ready.</p>
