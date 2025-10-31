@@ -8,7 +8,7 @@ const CtaSection: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
@@ -32,18 +32,33 @@ const CtaSection: React.FC = () => {
 
         setLoading(true);
 
-        // --- Backend Integration Simulation ---
-        // In a real application, this data would be sent to a backend API.
-        console.log('Submitting to waitlist database:', { 
-            email: trimmedEmail || null, 
-            whatsapp: trimmedWhatsapp || null 
-        });
-        
-        // Simulate a network request
-        setTimeout(() => {
-            setLoading(false);
+        // --- This is the REAL Backend Integration ---
+        try {
+            const response = await fetch('/api/waitlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: trimmedEmail || null,
+                    whatsapp: trimmedWhatsapp || null,
+                }),
+            });
+
+            if (!response.ok) {
+                // Handle server errors
+                const res = await response.json();
+                throw new Error(res.message || 'Something went wrong.');
+            }
+
+            // Success
             setSubmitted(true);
-        }, 1500);
+
+        } catch (err: any) {
+            setError(err.message || 'Failed to submit. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
