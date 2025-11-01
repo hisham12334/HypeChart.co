@@ -34,7 +34,7 @@ const CtaSection: React.FC = () => {
 
         // --- This is the REAL Backend Integration ---
         try {
-            const response = await fetch('/api/waitlist', {
+            const response = await fetch('https://hypechart-co.onrender.com/api/waitlist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
