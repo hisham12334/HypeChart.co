@@ -1,6 +1,7 @@
 import express from 'express';
 import pg from 'pg'; // Import node-postgres
 import dotenv from 'dotenv'; // Import dotenv
+import cors from 'cors';
 
 // Load environment variables from .env.local
 dotenv.config({ path: '.env.local' });
@@ -16,6 +17,15 @@ if (!process.env.DATABASE_URL) {
   console.log('Please create a .env.local file and add your Neon connection string as DATABASE_URL');
   process.exit(1);
 }
+// --- 2. CONFIGURE CORS ---
+// Replace this with your *actual* Vercel website URL
+const frontendURL = 'https://hype-chart-co.vercel.app/'; 
+
+const corsOptions = {
+  origin: frontendURL
+};
+
+app.use(cors(corsOptions));
 
 // Create a new pool to manage connections
 const pool = new Pool({
