@@ -37,7 +37,8 @@ const ChaoticBackground = () => {
 
 
 const HeroSection: React.FC = () => {
-    const { displayText, isFinished } = useTypingEffect("Sell out. Don't burn out.", 2000, true);
+    const { displayText, isFinished } = useTypingEffect("Sell out. Don't burn out!", 2000, true);
+
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       e.preventDefault();
